@@ -1,6 +1,6 @@
-## Trustee Wallet
+## Walleteum
 
-[Trustee Wallet](https://trustee.deals/) is the secure and simple way to create and manage crypto accounts. Quick and safe buy and sell bitcoin directly with your Visa or MasterCard
+[Walleteum](https://Walleteum.com/) is the secure and simple way to create and manage crypto accounts. Quick and safe buy and sell bitcoin directly with your Visa or MasterCard
 
 
 
@@ -47,12 +47,12 @@ Please note: by creating `~/androidsdk/licenses/android-sdk-license` file you ar
 #### Android build
 Download code from Github
 ```
-git clone https://github.com/trustee-wallet/trusteeWallet.git
+git clone https://github.com/walleteum/wallet.git
 ```
 
 Build preparation
 ```
-cd ./trusteeWallet
+cd ./wallet
 npm install
 npx jetifier
 rm -f shim.js
@@ -69,20 +69,20 @@ After successful build APK file `app-release.apk` can be found in `./app/build/o
 
 ### Android verifiable builds
 
-Using these steps anyone can verify the latest release of application TrusteeWallet that we distribute via Google Play built from code in this repository. Does not contain any hidden functions or any malicious code.
+Using these steps anyone can verify the latest release of application Walleteum that we distribute via Google Play built from code in this repository. Does not contain any hidden functions or any malicious code.
 
 **Please Note:** Google Play after deploying built packages making modifications with it.
 Adding own metadata, digital signs to code etc. Also there is some data that is changing from build-to-build and can't be the same: like build id. As a result builds can't be 100% fully identical. Files always will have minor differences that are not affecting application functionality.  
 
 The script `verify_android_build.sh` starting build of the Docker container from `./docker/Dockerfile.verifyandroidbuild` file.  
-Building steps getting TrusteeWallet code from this repository, configuring it with parameters from `verify_android_build.sh` script and starting build of universal APK file.   
+Building steps getting Walleteum code from this repository, configuring it with parameters from `verify_android_build.sh` script and starting build of universal APK file.   
 After successful build it's downloading from Google Play a similar universal APK file.  
 On the next step we decoding both APK files by `apktool`. File downloaded from Google Play to folder `fromGoogle` and file just built from sources to folder `fromBuild`.  
 Finally on the last step using simple `diff` command we checking both folders for differences.  
 
 ```bash 
-git clone https://github.com/trustee-wallet/trusteeWallet.git
-cd ./trusteeWallet
+git clone https://github.com/Walleteum/wallet.git
+cd ./wallet
 ./docker/verify_android_build.sh
 ```
 
@@ -127,7 +127,7 @@ diff <path to file1> <path to file2>
 In this example in both files differences related to changed build ID.
 
 ```diff
-root@37c6000f7ee9:/trustee# diff fromBuild/assets/crashlytics-build.properties fromGoogle/assets/crashlytics-build.properties
+root@37c6000f7ee9:/wallet# diff fromBuild/assets/crashlytics-build.properties fromGoogle/assets/crashlytics-build.properties
 6c6
 < #Tue Oct 27 14:57:43 GMT 2020
 ---
@@ -139,7 +139,7 @@ root@37c6000f7ee9:/trustee# diff fromBuild/assets/crashlytics-build.properties f
 ```
 
 ```diff
-root@37c6000f7ee9:/trustee# diff fromBuild/res/values/strings.xml fromGoogle/res/values/strings.xml
+root@37c6000f7ee9:/wallet# diff fromBuild/res/values/strings.xml fromGoogle/res/values/strings.xml
 70c70
 <     <string name="com.crashlytics.android.build_id">ec2f73f5-d473-4cb0-94fe-701f996ce221</string>
 ---
@@ -149,7 +149,7 @@ root@37c6000f7ee9:/trustee# diff fromBuild/res/values/strings.xml fromGoogle/res
 The rest of files referring to `smali_classes*` seems have some sort of decompilation artefacts.
 
 ```diff
-root@37c6000f7ee9:/trustee# diff 'fromBuild/smali_classes3/okhttp3/RealCall$AsyncCall.smali' 'fromGoogle/smali_classes3/okhttp3/RealCall$AsyncCall.smali'
+root@37c6000f7ee9:/wallet# diff 'fromBuild/smali_classes3/okhttp3/RealCall$AsyncCall.smali' 'fromGoogle/smali_classes3/okhttp3/RealCall$AsyncCall.smali'
 29,32c29
 <     .locals 1
 <
@@ -160,7 +160,7 @@ root@37c6000f7ee9:/trustee# diff 'fromBuild/smali_classes3/okhttp3/RealCall$Asyn
 ```
 
 ```diff
-root@37c6000f7ee9:/trustee# diff 'fromBuild/smali_classes3/okhttp3/internal/cache/DiskLruCache$2.smali' 'fromGoogle/smali_classes3/okhttp3/internal/cache/DiskLruCach$2.smali'
+root@37c6000f7ee9:/wallet# diff 'fromBuild/smali_classes3/okhttp3/internal/cache/DiskLruCache$2.smali' 'fromGoogle/smali_classes3/okhttp3/internal/cache/DiskLruCach$2.smali'
 27,30c27
 <     .locals 1
 <
@@ -172,11 +172,7 @@ root@37c6000f7ee9:/trustee# diff 'fromBuild/smali_classes3/okhttp3/internal/cach
 
 As we can see there are no significant differences between APK file downloaded from Google Play and file built from source code. So we can say there are no hidden functions that may harm users.   
 
-**Please note:** This verification method can be used only for the latest TrusteeWallet release. Because most of the third part packages that we use are also in active development and if we try to build some of the previous releases with latest packages versions there will be significant differences in APK files.  
+**Please note:** This verification method can be used only for the latest walleteum release. Because most of the third part packages that we use are also in active development and if we try to build some of the previous releases with latest packages versions there will be significant differences in APK files.  
 
 
-### Contacts
-For proposals and bug reports feel free to open and issue [HERE](https://github.com/trustee-wallet/trusteeWallet/issues)
-
-If you have any questions please contact us by email <contact@trustee.deals> or join our community in [Telegram](https://t.me/trustee_wallet)
 
